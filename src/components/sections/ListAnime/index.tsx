@@ -1,11 +1,13 @@
 import React from "react";
 import { CardItem, Paginator } from "@/components/UI";
 import { IAnime } from "@/models/anime.model";
-import { Typography, Box, Skeleton, Button } from "@mui/material";
+import { Typography, Box, Skeleton, Button, IconButton } from "@mui/material";
 import { PER_PAGE_OPTIONS } from "@/constant/global";
 import CardListItem from "../CardListItem";
 import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
+import { TFunction } from "i18next";
+import { Refresh } from "@mui/icons-material";
 export interface IListAnimeProps {
   view?: "grid" | "list";
   data: IAnime[];
@@ -38,25 +40,18 @@ const ListAnime: React.FC<IListAnimeProps> = ({
     }
 
     if (data.length === 0) {
-      return <NoDataMessage resetData={onResetData} />;
+      return <NoDataMessage resetData={onResetData} t={t} />;
     }
 
-    return data.map((item, idx) =>
-      view === "grid" ? (
-        <CardItem
-          key={idx}
-          title={item.title}
-          image={item.images.jpg.image_url}
-          to={`/detail/${item.mal_id}`}
-        />
-      ) : (
-        <CardListItem key={idx} data={item} />
-      )
+    return view === "grid" ? (
+      <GridView data={data} />
+    ) : (
+      <ListView data={data} />
     );
   };
 
   return (
-    <Box component="section" sx={{ mt: 2, mb: 6 }}>
+    <Box component="section" sx={{ mt: 2, mb: 6, width: "100%" }}>
       <motion.div
         key={view}
         initial={{ opacity: 0, scale: 1 }}
@@ -64,12 +59,7 @@ const ListAnime: React.FC<IListAnimeProps> = ({
         exit={{ opacity: 0, scale: 0.8 }}
         transition={{ duration: 0.5 }}
       >
-        {" "}
-        {view === "grid" ? (
-          <GridView content={renderContent()} />
-        ) : (
-          <ListView content={renderContent()} />
-        )}
+        {renderContent()}
       </motion.div>
 
       {!loading && (
@@ -80,7 +70,11 @@ const ListAnime: React.FC<IListAnimeProps> = ({
             perPage={perPage || PER_PAGE_OPTIONS[0]}
             onChangePage={onChangePage}
             onChangePerPage={onChangePerPage}
-            label={`${t("showingPagination", { start: 1, end: perPage, total: total })}`}
+            label={`${t("showingPagination", {
+              start: 1,
+              end: perPage,
+              total: total,
+            })}`}
           />
         </Box>
       )}
@@ -88,7 +82,7 @@ const ListAnime: React.FC<IListAnimeProps> = ({
   );
 };
 
-const GridView: React.FC<{ content: React.ReactNode }> = ({ content }) => (
+const GridView: React.FC<{ data: IAnime[] }> = ({ data }) => (
   <Box component="section" sx={{ mt: 2, mb: 6 }}>
     <Box
       sx={{
@@ -107,13 +101,24 @@ const GridView: React.FC<{ content: React.ReactNode }> = ({ content }) => (
         },
       }}
     >
-      {content}
+      {data.map((item, idx) => (
+        <CardItem
+          key={idx}
+          title={item.title}
+          image={item.images.jpg.image_url}
+          to={`/detail/${item.mal_id}`}
+        />
+      ))}
     </Box>
   </Box>
 );
 
-const ListView: React.FC<{ content: React.ReactNode }> = ({ content }) => (
-  <Box sx={{ display: "flex", flexDirection: "column", gap: 1 }}>{content}</Box>
+const ListView: React.FC<{ data: IAnime[] }> = ({ data }) => (
+  <Box sx={{ display: "flex", flexDirection: "column", gap: 1 }}>
+    {data.map((item, idx) => (
+      <CardListItem key={idx} data={item} />
+    ))}
+  </Box>
 );
 
 const LoadingSkeleton: React.FC<{ view: "grid" | "list" }> = ({ view }) =>
@@ -130,16 +135,32 @@ const LoadingSkeleton: React.FC<{ view: "grid" | "list" }> = ({ view }) =>
     </Box>
   );
 
-const NoDataMessage: React.FC<{ resetData: () => void }> = ({ resetData }) => (
-  <Typography variant="h6" sx={{ color: "#555" }}>
-    No available data
+const NoDataMessage: React.FC<{ resetData: () => void; t: TFunction }> = ({
+  resetData,
+  t,
+}) => (
+  <Typography
+    variant="h6"
+    sx={{
+      color: "#555",
+      display: "flex",
+      alignItems: "start",
+      flexDirection: "column",
+      gap: 1,
+    }}
+  >
+    {t("noData")}
     <Button
       variant="contained"
       color="primary"
       onClick={resetData}
-      sx={{ mt: 2 }}
+      size="small"
+      sx={{ mt: 2, display: "flex", alignItems: "center", gap: 1 }}
     >
-      Reset Data
+      <IconButton onClick={resetData} sx={{ color: "#fff" }}>
+        <Refresh />
+      </IconButton>
+      {t("resetData")}
     </Button>
   </Typography>
 );
