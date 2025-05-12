@@ -7,5 +7,10 @@
     "perPage": "Per Halaman",
     "ascending": "Menaik",
     "descending": "Menurun",
-    "back": "Kembali"
+    "back": "Kembali",
+    "notFoundPageTitle": "404 - Halaman Tidak Dijumpai",
+    "notFoundPageDescription": "Halaman yang anda cari tidak wujud.",
+    "goHome": "Pergi Ke Halaman Utama",
+    "noData": "Tiada data yang tersedia",
+    "resetData": "Set Semula Data"
 }

@@ -7,5 +7,10 @@
     "perPage": "Per Page",
     "ascending": "Ascending",
     "descending": "Descending",
-    "back": "Back"
+    "back": "Back",
+    "notFoundPageTitle": "404 - Page Not Found",
+    "notFoundPageDescription": "The page you're looking for doesn't exist.",
+    "goHome": "Go Home",
+    "noData": "No available data",
+    "resetData": "Reset Data"
 }
