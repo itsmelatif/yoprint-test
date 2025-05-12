@@ -6,5 +6,6 @@
     "showingPagination": "Menunjukkan {{start}} - {{end}} dari {{total}}",
     "perPage": "Per Halaman",
     "ascending": "Menaik",
-    "descending": "Menurun"
+    "descending": "Menurun",
+    "back": "Kembali"
 }

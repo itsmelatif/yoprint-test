@@ -6,5 +6,6 @@
     "showingPagination": "Showing {{start}} - {{end}} of {{total}}",
     "perPage": "Per Page",
     "ascending": "Ascending",
-    "descending": "Descending"
+    "descending": "Descending",
+    "back": "Back"
 }

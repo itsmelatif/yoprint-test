@@ -10,6 +10,8 @@ import {
 } from "@/components/sections";
 import { ArrowBack } from "@mui/icons-material";
 import { ToastNotification } from "@/components/UI";
+import { useTranslation } from "react-i18next";
+
 const Detail: React.FC = () => {
   const { id } = useParams();
   const { detail, loading, fetchDetail, error } = useAnimeStore();
@@ -24,6 +26,7 @@ const Detail: React.FC = () => {
   });
 
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   useEffect(() => {
     if (id) fetchDetail(id);
@@ -97,7 +100,7 @@ const Detail: React.FC = () => {
                 width: "100%",
               }}
             >
-              <ArrowBack /> Back
+              <ArrowBack /> {t("back")}
             </Button>
           )}
         </Box>
