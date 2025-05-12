@@ -4,16 +4,8 @@ import { SearchInput, ToastNotification } from "@/components/UI";
 import { IAnimeQueryParams } from "@/models/anime.model";
 import { ListAnime, SortAndViewSwitcher } from "@/components/sections";
 import { Box, Typography } from "@mui/material";
-import { PER_PAGE_OPTIONS } from "@/constant/global";
+import { PER_PAGE_OPTIONS, SORT_OPTIONS } from "@/constant/global";
 import { useTranslation } from "react-i18next";
-
-const SORT_OPTIONS = [
-  { label: "Title", value: "title" },
-  { label: "Popularity", value: "popularity" },
-  { label: "Favorites", value: "favorites" },
-  { label: "Aired", value: "start_date" },
-  { label: "Score", value: "score" },
-];
 
 const Home: React.FC = () => {
   const { t } = useTranslation();
@@ -98,7 +90,11 @@ const Home: React.FC = () => {
 
   return (
     <div>
-      <SearchInput value={searchQuery.q || ""} placeholder={t("search")} onSearch={handleSearch} />
+      <SearchInput
+        value={searchQuery.q || ""}
+        placeholder={t("search")}
+        onSearch={handleSearch}
+      />
       <Box
         sx={{
           display: "flex",
