@@ -1,0 +1,10 @@
+{
+    "animeList": "Anime List",
+    "search": "Search",
+    "sortBy": "Sort By",
+    "sortOrder": "Sort Order",
+    "showingPagination": "Showing {{start}} - {{end}} of {{total}}",
+    "perPage": "Per Page",
+    "ascending": "Ascending",
+    "descending": "Descending"
+}

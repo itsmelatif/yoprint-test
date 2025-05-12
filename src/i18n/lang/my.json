@@ -1,0 +1,10 @@
+{
+    "animeList": "Senarai Anime",
+    "search": "Cari",
+    "sortBy": "Isih Mengikut",
+    "sortOrder": "Susunan",
+    "showingPagination": "Menunjukkan {{start}} - {{end}} dari {{total}}",
+    "perPage": "Per Halaman",
+    "ascending": "Menaik",
+    "descending": "Menurun"
+}
